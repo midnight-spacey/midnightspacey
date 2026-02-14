@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title></title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+ 
+  <!-- intiliaze my shi -->
+  <link rel="icon" href="PASTE_ICON_LINK.png" type="image/png">
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <style>
+    :root {
+      --accent: #c77dff;
+      --glass: rgba(20,20,30,0.55);
+      --border: rgba(255,255,255,0.15);
+    }
+
+    * {
+      box-sizing: border-box;
+      font-family: 'Quicksand', sans-serif;
+    }
+
+    body {
+      margin: 0;
+      height: 100vh;
+      background: url("background.png") center / cover no-repeat;
+      overflow: hidden;
+      color: #fff;
+    }
+
+    /* enter on click  */
+    #enter {
+      position: fixed;
+      inset: 0;
+      background: #000;
+      display: grid;
+      place-items: center;
+      z-index: 999;
+      cursor: pointer;
+      transition: opacity 0.6s ease;
+    }
+
+    #enter h1 {
+      color: var(--accent);
+      font-size: 36px;
+      letter-spacing: 2px;
+      animation: pulse 1.6s infinite;
+    }
+
+    @keyframes pulse {
+      0%,100% { opacity: 0.4; }
+      50% { opacity: 1; }
+    }
+
+    /* particles.js */
+    .particle {
+      position: absolute;
+      width: 6px;
+      height: 6px;
+      background: rgba(255,255,255,0.5);
+      border-radius: 50%;
+      animation: floatUp linear infinite;
+    }
+
+    @keyframes floatUp {
+      from { transform: translateY(100vh); opacity: 0; }
+      to { transform: translateY(-10vh); opacity: 1; }
+    }
+
+    /* midnight spacey */
+    .card {
+      position: absolute;
+      inset: 0;
+      margin: auto;
+      width: 360px;
+      height: fit-content;
+      padding: 28px;
+      background: var(--glass);
+      backdrop-filter: blur(18px);
+      border-radius: 18px;
+      border: 1px solid var(--border);
+      text-align: center;
+      box-shadow: 0 0 40px rgba(0,0,0,0.6);
+    }
+
+    .avatar {
+      width: 90px;
+      height: 90px;
+      margin: 0 auto 12px;
+      border-radius: 50%;
+      background: url("pfp.jpg") center / cover;
+      border: 2px solid var(--accent);
+    }
+
+    h2 {
+      margin: 0;
+      color: var(--accent);
+      font-size: 26px;
+    }
+
+    .bio {
+      font-size: 14px;
+      opacity: 0.85;
+      margin: 10px 0 18px;
+    }
+
+    .status {
+      display: inline-block;
+      padding: 6px 12px;
+      font-size: 12px;
+      border-radius: 999px;
+      background: rgba(0,0,0,0.4);
+      border: 1px solid var(--border);
+      margin-bottom: 20px;
+    }
+
+    .icons {
+      display: flex;
+      justify-content: center;
+      gap: 14px;
+    }
+
+    .icons a {
+      width: 42px;
+      height: 42px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      background: rgba(0,0,0,0.45);
+      border: 1px solid var(--border);
+      color: var(--accent);
+      text-decoration: none;
+      transition: 0.25s ease;
+    }
+
+    .icons a:hover {
+      background: var(--accent);
+      color: #000;
+      transform: scale(1.1);
+    }
+  </style>
+</head>
+<body>
+
+<div id="enter">
+  <h1>click to enter</h1>
+</div>
+
+<audio id="music" loop>
+  <source src="IN MY HEAD!.mp3" type="audio/mpeg">
+</audio>
+
+<div class="card">
+  <div class="avatar"></div>
+  <h2>midnight spacey!</h2>
+
+  <div class="bio">
+    hi, i am spacey. i am a dev.<br>
+    dsc.gg/TZUgmFTy
+  </div>
+
+  <div class="status">📍 your moms house</div>
+
+  <div class="icons">
+    <a href="discord.gg/users/1389074964514082936"><i class="fab fa-discord"></i></a>
+    <a href="tiktok.com/@luh_a500"><i class="fab fa-tiktok"></i></a>
+    <a href="https://github.com/midnight-spacey"><i class="fab fa-github"></i></a>
+    <a href="https://open.spotify.com/user/31ydtuvp34jcf5cjc72etbt6hljm"><i class="fab fa-spotify"></i></a>
+    <a href="jaydenblex909@gmail.com"><i class="fas fa-envelope"></i></a>
+  </div>
+</div>
+
+<script>
+  const enter = document.getElementById("enter");
+  const music = document.getElementById("music");
+
+  enter.onclick = () => {
+    music.play();
+    enter.style.opacity = "0";
+    setTimeout(() => enter.remove(), 600);
+  };
+
+  const text = "midnight spacey";
+  let i = 0, del = false;
+
+  setInterval(() => {
+    document.title = del
+      ? text.slice(0, i--)
+      : text.slice(0, i++);
+
+    if (i > text.length) del = true;
+    if (i < 0) { del = false; i = 0; }
+  }, 180);
+
+  for (let i = 0; i < 25; i++) {
+    const p = document.createElement("div");
+    p.className = "particle";
+    p.style.left = Math.random() * 100 + "vw";
+    p.style.animationDuration = (6 + Math.random() * 6) + "s";
+    p.style.animationDelay = Math.random() * 5 + "s";
+    document.body.appendChild(p);
+  }
+</script>
+
+</body>
+</html>
